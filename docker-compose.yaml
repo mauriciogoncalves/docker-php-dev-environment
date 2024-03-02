@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  mariadb:
+    command: --max-allowed-packet=64MB
+    container_name: dev-mariadb
+    restart: always
+    image: mariadb
+    ports:
+      - '33060:3306'
+    networks:
+      - dev
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - data:/var/lib/mariadb
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: dev-redis
+    restart: always
+    ports:
+      - '63790:6379'
+    networks:
+      - dev
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - data:/data
+
+  postgres:
+    image: postgres:latest
+    container_name: dev-postgres
+    restart: always
+    ports:
+      - '54320:5432'
+    networks:
+      - dev
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=dev
+
+  web:
+    container_name: dev-php-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 800:80
+      - 220:22
+    volumes:
+      - ./:/var/www
+    networks:
+      - dev
+    links:
+      - postgres
+      - mariadb
+      - redis
+    depends_on:
+      - postgres
+      - mariadb
+      - redis
+
+volumes:
+  data:
+    driver: local
+
+networks:
+  dev:
