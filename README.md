@@ -47,3 +47,9 @@ This page use Javascript Workers to trigger parallel requests to PHP file that t
  - **test.php**  &hairsp;  &hairsp;  &hairsp;  `Backend function to test connection with Redis, Mysql and Postgres`
  
  ![test page](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/page.gif)
+ ----
+  ## Development tools 
+  PHP docker machine will create 3 log files in our local folder. We can tail PHP errors and access logs. 
+ - docker-php-dev-environment/**xdebug_remote.log**  
+ - docker-php-dev-environment/**php_error.log**  
+ - docker-php-dev-environment/**site.log**
