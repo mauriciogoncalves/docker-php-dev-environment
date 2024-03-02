@@ -3,13 +3,13 @@ error_reporting(0);
 
 /**
  * @param string $user mysql username (default root)
- * @param string $pass mysql password
+ * @param string $pass mysql password (default mysql)
  * @param string $db mysql database name (default mysql)
  * @param string $host mysql host (default 127.0.0.1)
  * @param int $port mysql port (default 3306)
  * @return array
  */
-function mysqlTest($user = 'root', $pass = null, $db = 'mysql', $host = '127.0.0.1', $port = 3306)
+function mysqlTest($user = 'root', $pass = 'password', $db = 'mysql', $host = '127.0.0.1', $port = 3306)
 {
     try {
         $connection = mysqli_connect($host, $user, $pass, null, $port);
@@ -40,14 +40,14 @@ function mysqlTest($user = 'root', $pass = null, $db = 'mysql', $host = '127.0.0
 }
 
 /**
- * @param string $user postgres username (default root)
- * @param string $pass postgres password
+ * @param string $user postgres username (default postgres)
+ * @param string $pass postgres password (default password)
  * @param string $db postgres database name (default postgres)
  * @param string $host postgres host (default 127.0.0.1)
  * @param int $port postgres port (default 5432)
  * @return array
  */
-function postgresTest($user = 'root', $pass = null, $db = 'postgres', $host = '127.0.0.1', $port = 5432)
+function postgresTest($user = 'postgres', $pass = 'password', $db = 'postgres', $host = '127.0.0.1', $port = 5432)
 {
     try {
         $connection = pg_connect("host={$host} dbname={$db} user={$user} password={$pass} port={$port} connect_timeout=5 ");
@@ -125,7 +125,7 @@ if (isset($_REQUEST['task']) && $_REQUEST['task'] == 'mysqlTest') {
         $_REQUEST['password'],
         $_REQUEST['database'],
         $_REQUEST['host'],
-        $_REQUEST['port'],
+        $_REQUEST['port']
     );
     echo json_encode(array_merge($_REQUEST, $testResult));
 } elseif (isset($_REQUEST['task']) && $_REQUEST['task'] == 'postgresTest') {
@@ -134,22 +134,22 @@ if (isset($_REQUEST['task']) && $_REQUEST['task'] == 'mysqlTest') {
         $_REQUEST['password'],
         $_REQUEST['database'],
         $_REQUEST['host'],
-        $_REQUEST['port'],
+        $_REQUEST['port']
     );
     echo json_encode(array_merge($_REQUEST, $testResult));
 } elseif (isset($_REQUEST['task']) && $_REQUEST['task'] == 'redisTest') {
     $testResult = redisTest(
         $_REQUEST['password'],
         $_REQUEST['host'],
-        $_REQUEST['port'],
+        $_REQUEST['port']
     );
     echo json_encode(array_merge($_REQUEST, $testResult));
 } else {
     echo '<textarea style="width: 100%; height: 300px">';
     echo "PHP      " . PHP_VERSION . PHP_EOL;
-    echo "POSTGRES " . (postgresTest())['msg'] . PHP_EOL;
-    echo "MYSQL    " . (mysqlTest())['msg'] . PHP_EOL;
-    echo "REDIS    " . (redisTest())['msg'] . PHP_EOL;
+    echo "POSTGRES " . (postgresTest())['message'] . PHP_EOL;
+    echo "MYSQL    " . (mysqlTest())['message'] . PHP_EOL;
+    echo "REDIS    " . (redisTest())['message'] . PHP_EOL;
     echo '</textarea>';
 }
 
