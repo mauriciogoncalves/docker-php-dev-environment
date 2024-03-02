@@ -41,9 +41,9 @@ A sample web page is already added at /var/www/web folder.
 This page use Javascript Workers to trigger parallel requests to PHP file that test databases.
     
  - **index.html** `Sample Page`
- - **style.css** $~$$~$ `Page styles` 
- - **main.js**  $~$$~$$~$$~$$~$`Page Javascript to trigger and handle response from workers`
+ - **style.css**  &hairsp;  &hairsp; `Page styles` 
+ - **main.js**  &hairsp;  &hairsp;  &hairsp;  &hairsp; `Page Javascript to trigger and handle response from workers`
  - **workers.js** `Workers to fire "multi-thread" requests` 
- - **test.php**$~$$~$$~$ `Backend function to test connection with Redis, Mysql and Postgres`
+ - **test.php**  &hairsp;  &hairsp;  &hairsp;  `Backend function to test connection with Redis, Mysql and Postgres`
  
  
