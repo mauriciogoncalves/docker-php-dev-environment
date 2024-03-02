@@ -46,4 +46,4 @@ This page use Javascript Workers to trigger parallel requests to PHP file that t
  - **workers.js** `Workers to fire "multi-thread" requests` 
  - **test.php**  &hairsp;  &hairsp;  &hairsp;  `Backend function to test connection with Redis, Mysql and Postgres`
  
- 
+ ![test page](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/page.gif)
