@@ -1,3 +1,6 @@
 *.DS_Store
 /.idea/
 /out/
+/php_error.log
+/xdebug_remote.log
+/site.log
