@@ -13,8 +13,9 @@ Assuming we have what is necessary already installed (Like git, docker, ssh and 
   ```
 git clone https://github.com/mauriciogoncalves/docker-php-dev-environment.git
 cd docker-php-dev-environment
-docker-compose -f docker-compose.yaml up
+docker-compose -f ./php7-docker-compose.yaml up
 ```   
+
 After this we should have four docker virtual machines container  running our services.
   
 ##   Services
@@ -54,3 +55,36 @@ This page use Javascript Workers to trigger parallel requests to PHP file that t
  - docker-php-dev-environment/**php_error.log**  
  - docker-php-dev-environment/**error_log.log**
  - docker-php-dev-environment/**acess_log.log**
+
+When you save a file in local folder, for example docker-php-dev-environment/index.html, it automatically change in docker machine at /var/www/web/index.html
+
+## Debug
+In PhpStorm you need to configure ;
+
+ - Deployment
+ - Servers
+ - PHP Debug port
+ - Open SSH tunnel
+
+#### PhpStorm Deployment
+![PhpStorm Deployment](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/phpsotm-deployment.jpg)
+#### PhpStorm Servers
+![PhpStorm Servers](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/phpsotm-servers.jpg)
+#### PhpStorm Debug Port
+![PhpStorm Debug](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/phpsotm-debug.jpg)
+
+#### Open SSH Tunnel
+Open the SSH tunnel, default password is defined as "password"
+ ```
+ssh -R 9000:127.0.0.1:9001 -p220 root@127.0.0.1
+```   
+
+Now when you use the GET parameet XDEBUG_SESSION_START=phpstorm debug will be enables (or Cookie XDEBUG_SESSION). 
+Like:
+http://localhost:800/test.php?XDEBUG_SESSION_START=phpstorm
+![PhpStorm Debug](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/debug.jpg)
+
+That's it! Just git clone, docker compose up, and we can deugging our PHP files.
+
+---
+ 
