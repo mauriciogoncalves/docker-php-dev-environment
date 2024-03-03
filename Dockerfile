@@ -13,7 +13,7 @@ RUN ["apt-get", "dist-upgrade", "-y"]
 RUN ["apt-get", "install", "mlocate", "vim", "net-tools", "iputils-ping", "libpq-dev", "libssl-dev", "sqlite3", "libicu-dev", "-y"]
 RUN ["apt-get", "install", "libzip-dev", "libsqlite3-dev", "libcurl4-openssl-dev", "sqlite3", "libxml2-dev", "unzip", "-y"]
 RUN ["apt-get", "install", "redis-tools", "sudo", "git", "acl", "file", "gettext", "gnupg", "gnupg1", "gnupg2", "wget", "-y"]
-RUN ["apt-get", "install", "libbz2-dev", "zip", "unzip", "-y"]
+RUN ["apt-get", "install", "libbz2-dev", "zip", "unzip", "gcc", "make", "autoconf", "libc-dev", "pkg-config", "-y"]
 
 
 
@@ -81,6 +81,8 @@ RUN docker-php-ext-enable soap
 
 RUN yes | pecl install xdebug
 RUN docker-php-ext-enable xdebug
+RUN no | pecl install apcu
+RUN echo extension=apcu.so > /usr/local/etc/php/conf.d/apcu.ini
 
 RUN echo "[xdebug]"                                    >  /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo 'zend_extension=xdebug'                       >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -129,7 +131,11 @@ RUN echo 'error_log = "/var/www/php_error.log"' >> /usr/local/etc/php/php.ini
 
 
 ############################################### CONFIGURE APACHE #######################################################
-COPY ./apache/vhosts.conf /etc/apache2/sites-available/000-default.conf
+COPY ./apache/*.conf /etc/apache2/sites-enabled/
+COPY ./apache/server.crt /etc/apache2/server.crt
+COPY ./apache/server.key /etc/apache2/server.key
+RUN sudo a2enmod rewrite
+RUN sudo a2enmod ssl
 ########################################################################################################################
 
 
@@ -140,9 +146,8 @@ RUN unzip phpMyAdmin-5.2.1-all-languages.zip
 RUN cp -avr ./phpMyAdmin-5.2.1-all-languages/. /usr/share/phpmyadmin
 RUN rm -rf ./phpMyAdmin-5.2.1-all-languages/
 RUN rm phpMyAdmin-5.2.1-all-languages.zip
-COPY ./phpMyAdmin/phpmyadmin.conf /etc/apache2/sites-available/phpmyadmin.conf
+COPY ./phpMyAdmin/phpmyadmin.conf /etc/apache2/sites-enabled/phpmyadmin.conf
 COPY ./phpMyAdmin/config.inc.php /usr/share/phpmyadmin/config.inc.php
-RUN ln -s /etc/apache2/sites-available/phpmyadmin.conf /etc/apache2/sites-enabled/phpmyadmin.conf
 RUN mkdir /etc/phpmyadmin
 RUN htpasswd -b -c /etc/phpmyadmin/htpasswd.setup root password
 RUN mkdir -p /usr/share/phpmyadmin/tmp/

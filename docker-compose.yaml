@@ -49,6 +49,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 800:80
+      - 4430:443
       - 220:22
     volumes:
       - ./:/var/www

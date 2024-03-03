@@ -13,7 +13,6 @@ Assuming we have what is necessary already installed (Like git, docker, ssh and 
   ```
 git clone https://github.com/mauriciogoncalves/docker-php-dev-environment.git
 cd docker-php-dev-environment
-sudo bash
 docker-compose -f docker-compose.yaml up
 ```   
 After this we should have four docker virtual machines container  running our services.
@@ -25,6 +24,7 @@ After this we should have four docker virtual machines container  running our se
 |postgres|**Postgres**|127.0.0.1:54320|postgres:5432|postgres|password|dev   
 |mariadb |**MariaDB** |127.0.0.1:33060|redis:3369   | admin  |password|dev    
 |dev-php |**Apache** |127.0.0.1:800  |localhost:80 |     
+|dev-php |**Apache** |127.0.0.1:4430 |localhost:443|     
 |dev-php |**SSH** |127.0.0.1:220  |localhost:22 | root   |password   
    
 ##   Web Tools
@@ -52,4 +52,5 @@ This page use Javascript Workers to trigger parallel requests to PHP file that t
   PHP docker machine will create 3 log files in our local folder. We can tail PHP errors and access logs. 
  - docker-php-dev-environment/**xdebug_remote.log**  
  - docker-php-dev-environment/**php_error.log**  
- - docker-php-dev-environment/**site.log**
+ - docker-php-dev-environment/**error_log.log**
+ - docker-php-dev-environment/**acess_log.log**
