@@ -15,6 +15,9 @@ RUN ["apt-get", "install", "libzip-dev", "libsqlite3-dev", "libcurl4-openssl-dev
 RUN ["apt-get", "install", "redis-tools", "sudo", "git", "acl", "file", "gettext", "gnupg", "gnupg1", "gnupg2", "wget", "-y"]
 RUN ["apt-get", "install", "libbz2-dev", "zip", "unzip", "-y"]
 
+
+
+
 ############################################# INSTALL SSH SERVER #######################################################
 USER root
 RUN echo 'root:password' | chpasswd
@@ -37,6 +40,8 @@ RUN mkdir -p /usr/local/bin
 RUN mv composer.phar /usr/local/bin/composer
 RUN chmod +x /usr/local/bin/composer
 ########################################################################################################################
+
+
 
 
 ############################################# INSTALL PHP EXTENSION ####################################################
@@ -93,6 +98,7 @@ RUN echo 'xdebug.log=/var/www/xdebug_remote.log'       >> /usr/local/etc/php/con
 
 
 
+
 ############################################# INSTALL PG ADMIN  ########################################################
 RUN curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
 RUN echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/bullseye pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list
@@ -100,6 +106,7 @@ RUN ["apt-get", "update"]
 RUN ["apt-get", "install", "pgadmin4", "-y"]
 RUN PGADMIN_SETUP_PASSWORD=password PGADMIN_SETUP_EMAIL=admin@dev.dev  /usr/pgadmin4/bin/setup-web.sh --yes
 ########################################################################################################################
+
 
 
 
@@ -119,14 +126,12 @@ RUN echo 'error_log = "/var/www/php_error.log"' >> /usr/local/etc/php/php.ini
 ########################################################################################################################
 
 
-RUN echo 23 > /tmp/bla
 
-# to use locate command
-RUN updatedb
 
 ############################################### CONFIGURE APACHE #######################################################
 COPY ./apache/vhosts.conf /etc/apache2/sites-available/000-default.conf
 ########################################################################################################################
+
 
 
 ################################################## PHPMYADMIN ##########################################################
@@ -137,12 +142,17 @@ RUN rm -rf ./phpMyAdmin-5.2.1-all-languages/
 RUN rm phpMyAdmin-5.2.1-all-languages.zip
 COPY ./phpMyAdmin/phpmyadmin.conf /etc/apache2/sites-available/phpmyadmin.conf
 COPY ./phpMyAdmin/config.inc.php /usr/share/phpmyadmin/config.inc.php
-RUN ln -s /etc/apache2/sites-available/phpmyadmin.conf   /etc/apache2/sites-enabled/phpmyadmin.conf
+RUN ln -s /etc/apache2/sites-available/phpmyadmin.conf /etc/apache2/sites-enabled/phpmyadmin.conf
 RUN mkdir /etc/phpmyadmin
 RUN htpasswd -b -c /etc/phpmyadmin/htpasswd.setup root password
 RUN mkdir -p /usr/share/phpmyadmin/tmp/
+RUN chown www-data:www-data /usr/share/phpmyadmin/tmp/
 RUN chown -Rv www-data:www-data -R /var/www/web
 ########################################################################################################################
+
+
+# to use locate command
+RUN updatedb
 
 # TO START 2 DAEMONS
 COPY dockerStartupScript.sh /usr/local/myscripts/dockerStartupScript.sh
