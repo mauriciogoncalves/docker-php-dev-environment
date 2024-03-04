@@ -91,7 +91,7 @@ We configure phpstorm to listen PHP debug requests from PHP Cli. (The green dot 
 
 We create this function to make it easy to execute script in debug mode
  ```
-function php_debug() { php -dxdebug.remote_enable=1 -dxdebug.remote_mode=req -dxdebug.remrt=1 -dxdebug.remote_port=9000 -dxdebug.remote_host=localhost -dxdebug.idekey=phpstorm -dxdebug.remote_connect_back=0 "$@"; }
+function php_debug() { php -dxdebug.remote_enable=1 -dxdebug.remote_mode=req -dxdebug.remote_autostart=1 -dxdebug.remote_port=9000 -dxdebug.remote_host=localhost -dxdebug.idekey=phpstorm -dxdebug.remote_connect_back=0 "$@"; }
 ```   
 now we can call a php like this:
 ```   
