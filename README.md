@@ -86,10 +86,10 @@ http://localhost:800/test.php?XDEBUG_SESSION_START=phpstorm
 
 
 ## PHP CLI Debug
-We configure phpstorm to listen PHP debug requests from PHP Cli. (The green dot show its listening)
+We need to configure phpstorm to listen PHP debug requests from PHP Cli. (The green dot show its listening)
 ![PhpStorm Debug Cli](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/phpsotm-debug-cli.jpg)
 
-We create this function to make it easy to execute script in debug mode
+We will create this function to make it easy to execute script in debug mode
  ```
 function php_debug() { php -dxdebug.remote_enable=1 -dxdebug.remote_mode=req -dxdebug.remote_autostart=1 -dxdebug.remote_port=9000 -dxdebug.remote_host=localhost -dxdebug.idekey=phpstorm -dxdebug.remote_connect_back=0 "$@"; }
 ```   
