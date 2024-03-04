@@ -87,7 +87,7 @@ http://localhost:800/test.php?XDEBUG_SESSION_START=phpstorm
 
 ## PHP CLI Debug
 We configure phpstorm to listen PHP debug requests from PHP Cli. (The green dot show its listening)
-![PhpStorm Debug Clu](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/phpstorm-debug-cli.jpg)
+![PhpStorm Debug Cli](https://raw.githubusercontent.com/mauriciogoncalves/docker-php-dev-environment/main/web/images/phpsotm-debug-cli.jpg)
 
 We create this function to make it easy to execute script in debug mode
  ```
@@ -98,7 +98,7 @@ now we can call a php like this:
 php_debug ./web/test.php
 ```   
 
-That's it! Just git clone, docker compose up, and we can debugging our PHP files.
+#### That's it! Just git clone, docker compose up, and we can debug our PHP files.
 
 ---
  
