@@ -15,9 +15,22 @@ git clone https://github.com/mauriciogoncalves/docker-php-dev-environment.git
 cd docker-php-dev-environment
 docker-compose -f ./php7-docker-compose.yaml up
 ```   
+> [!NOTE]  
+> To use phpstorm 2020.2 or older for debug, we need to use the PHP7 (with xDebug2.9).
+> 
+> Use docker compose file: **php7-docker-compose**
+
+> [!TIP]  
+> To use phpstorm 2020.3 or newer for debug, we can use the PHP8 (with xDebug3).
+> 
+> Use docker compose file: **php8-docker-compose**
+
 
 After this we should have four docker virtual machines container  running our services.
-  
+
+
+
+
 ##   Services
 |Container|  Service  | Remote Access | Local Access|Username|Password|Database|  
 |    -   |      -     |        -      |        -    |     -  |    -   | - |    
@@ -97,6 +110,7 @@ now we can call a php like this:
 ```   
 php_debug ./web/test.php
 ```   
+
 
 #### That's it! Just git clone, docker compose up, and we can debug our PHP files.
 
