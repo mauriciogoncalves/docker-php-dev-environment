@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   mariadb:
-    command: --max-allowed-packet=64MB
     container_name: dev-mariadb
+    command: --max-allowed-packet=64MB
     restart: always
     image: mariadb
     ports:
@@ -16,8 +16,8 @@ services:
       - data:/var/lib/mariadb
 
   redis:
-    image: redis:6.2-alpine
     container_name: dev-redis
+    image: redis:6.2-alpine
     restart: always
     ports:
       - '63790:6379'
@@ -28,8 +28,8 @@ services:
       - data:/data
 
   postgres:
-    image: postgres:latest
     container_name: dev-postgres
+    image: postgres:latest
     restart: always
     ports:
       - '54320:5432'
@@ -43,10 +43,10 @@ services:
       - POSTGRES_DB=dev
 
   web:
-    container_name: dev-php-web
+    container_name: dev-php8-web
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: PHP8.Dockerfile
     ports:
       - 800:80
       - 4430:443
