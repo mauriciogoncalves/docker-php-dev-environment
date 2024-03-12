@@ -14,6 +14,7 @@ RUN ["apt-get", "install", "libzip-dev", "libsqlite3-dev", "libcurl4-openssl-dev
 RUN ["apt-get", "install", "redis-tools", "sudo", "git", "acl", "file", "gettext", "gnupg", "gnupg1", "gnupg2", "wget", "-y"]
 RUN ["apt-get", "install", "libbz2-dev", "zip", "unzip", "gcc", "make", "autoconf", "libc-dev", "pkg-config", "-y"]
 
+RUN ["apt-get", "install", "mariadb-client", "-y"]
 
 
 
