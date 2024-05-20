@@ -29,23 +29,23 @@ After these commands we should have four docker virtual machines container  runn
 
 
 
-
 ##   Services Details
-|Container|  Service  | Remote Access | Local Access|Username|Password|Database|  
-|    -   |      -     |        -      |        -    |     -  |    -   | - |    
-|redis   |**Redis** |127.0.0.1:66790|redis:3369   |        |password|     
-|postgres|**Postgres**|127.0.0.1:54320|postgres:5432|postgres|password|dev   
-|mariadb |**MariaDB** |127.0.0.1:33060|redis:3369   | admin  |password|dev    
-|dev-php |**Apache** |127.0.0.1:800  |localhost:80 |     
-|dev-php |**Apache** |127.0.0.1:4430 |localhost:443|     
-|dev-php |**SSH** |127.0.0.1:220  |localhost:22 | root   |password   
-   
+| Container | Service      | Remote Access   | Local Access  | Username | Password | Database |  
+|-----------|--------------|-----------------|---------------|----------|----------|----------|    
+| redis     | **Redis**    | 127.0.0.1:66790 | redis:3369    |          | password |          |
+| postgres  | **Postgres** | 127.0.0.1:54320 | postgres:5432 | postgres | password | dev      |
+| mariadb   | **MariaDB**  | 127.0.0.1:33060 | redis:3369    | admin    | password | dev      |
+| dev-php   | **Apache**   | 127.0.0.1:800   | localhost:80  |          |          |          |
+| dev-php   | **Apache**   | 127.0.0.1:4430  | localhost:443 |          |          |          |
+| dev-php   | **SSH**      | 127.0.0.1:220   | localhost:22  | root     | password |          |
+
 ##   Web Tools
-|Application| Link                          | Username    |Password| Info |  
-|      -    |             -                 |      -      |    -   |   -  |
-|PhpMyAdmin |http://localhost:800/phpMyAdmin|admin        |password|   
-|PGAdmin4   |http://localhost:800/pgadmin4  |admin@dev.dev|password|  
-|Test Page  |http://localhost:800/index.html|             |        | /var/www/web  
+| Application | Link                            | Username      | Password | Info         |  
+|-------------|---------------------------------|---------------|----------|--------------|
+| PhpMyAdmin  | http://localhost:800/phpMyAdmin | admin         | password |              |
+| PGAdmin4    | http://localhost:800/pgadmin4   | admin@dev.dev | password |              |
+| Test Page   | http://localhost:800/index.html |               |          | /var/www/web |
+
  ---
  
  
